@@ -2,9 +2,9 @@ import unittest
 import tempfile
 import os
 
-import encryption
+import convergence
 
-class TestEncryption(unittest.TestCase):
+class TestConvergence(unittest.TestCase):
     def setUp(self):
         self.directory = tempfile.mkdtemp()
 
@@ -32,26 +32,26 @@ class TestEncryption(unittest.TestCase):
         os.rmdir(self.directory)
 
     def test_inline_encryption(self):
-        encryption.encrypt_file_inline(self.sample1, None)
+        convergence.encrypt_file_inline(self.sample1, None)
 
         self.assertNotEqual(
             self.contents(self.sample1),
             "Superstar!\n")
 
     def test_inline_encryption_with_passphrase(self):
-        encryption.encrypt_file_inline(self.sample1, "potato")
+        convergence.encrypt_file_inline(self.sample1, "potato")
 
     def test_deterministic_inline_encryption(self):
-        encryption.encrypt_file_inline(self.sample1, None)
-        encryption.encrypt_file_inline(self.sample2, None)
+        convergence.encrypt_file_inline(self.sample1, None)
+        convergence.encrypt_file_inline(self.sample2, None)
 
         self.assertEqual(
             self.contents(self.sample1),
             self.contents(self.sample2))
 
     def test_passphrase_does_something(self):
-        encryption.encrypt_file_inline(self.sample1, "first")
-        encryption.encrypt_file_inline(self.sample2, "second")
+        convergence.encrypt_file_inline(self.sample1, "first")
+        convergence.encrypt_file_inline(self.sample2, "second")
 
         self.assertNotEqual(
             self.contents(self.sample1),
@@ -60,28 +60,28 @@ class TestEncryption(unittest.TestCase):
     def test_inline_decryption(self):
         plaintext = self.contents(self.sample1)
 
-        key = encryption.encrypt_file_inline(self.sample1, None)
+        key = convergence.encrypt_file_inline(self.sample1, None)
 
-        encryption.decrypt_file_inline(self.sample1, key)
+        convergence.decrypt_file_inline(self.sample1, key)
 
         self.assertEqual(plaintext, self.contents(self.sample1))
 
     def test_inline_decryption_with_passphrase(self):
         plaintext = self.contents(self.sample1)
 
-        key = encryption.encrypt_file_inline(self.sample1, "super secret")
+        key = convergence.encrypt_file_inline(self.sample1, "super secret")
 
-        encryption.decrypt_file_inline(self.sample1, key)
+        convergence.decrypt_file_inline(self.sample1, key)
 
         self.assertEqual(plaintext, self.contents(self.sample1))
 
     def test_streaming_decryption(self):
         plaintext = self.contents(self.sample1)
 
-        key = encryption.encrypt_file_inline(self.sample1, "super secret")
+        key = convergence.encrypt_file_inline(self.sample1, "super secret")
 
         decrypted = ""
-        for chunk in encryption.decrypt_generator(self.sample1, key):
+        for chunk in convergence.decrypt_generator(self.sample1, key):
             decrypted += chunk
 
         self.assertEqual(plaintext, decrypted)
