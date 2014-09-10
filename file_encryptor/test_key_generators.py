@@ -13,13 +13,13 @@ class TestKeyGenerators(unittest.TestCase):
         self.sample3 = os.path.join(self.directory, "frowny.txt")
 
         with open(self.sample1, "wb") as f:
-            f.write("Superstar!\n".encode('utf-8'))
+            f.write("Superstar!\n")
 
         with open(self.sample2, "wb") as f:
-            f.write("Superstar!\n".encode('utf-8'))
+            f.write("Superstar!\n")
 
         with open(self.sample3, "wb") as f:
-            f.write("Frowny face :(\n".encode('utf-8'))
+            f.write("Frowny face :(\n")
 
     def tearDown(self):
         os.remove(self.sample1)
