@@ -1,10 +1,10 @@
-import unittest2
+import unittest
 import tempfile
 import os
 
 import convergence
 
-class TestConvergence(unittest2.TestCase):
+class TestConvergence(unittest.TestCase):
     def setUp(self):
         self.directory = tempfile.mkdtemp()
 
