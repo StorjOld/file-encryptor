@@ -1,4 +1,5 @@
-import pycryptopp
+from Crypto.Cipher import AES
+from Crypto.Util import Counter
 from settings import CHUNK_SIZE
 
 import key_generators
@@ -69,8 +70,9 @@ def iter_transform(filename, key):
 
     """
     # We are not specifying the IV here.
-    aes = pycryptopp.cipher.aes.AES(key=key)
+    # aes = pycryptopp.cipher.aes.AES(key=key)
+    aes = AES.new(key, AES.MODE_CTR, counter=Counter.new(128))
 
     with open(filename, "rb+") as f:
         for chunk in iter(lambda: f.read(CHUNK_SIZE), b''):
-            yield aes.process(chunk), f
+            yield aes.encrypt(chunk), f
