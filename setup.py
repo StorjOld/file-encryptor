@@ -16,7 +16,8 @@ setup(
     ],
     extras_require={
         'test': [
-            'tox'
+            'tox',
+            'unittest2'
         ]
     }
 )
