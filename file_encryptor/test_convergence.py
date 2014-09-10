@@ -4,7 +4,7 @@ import os
 
 import convergence
 
-class TestConvergence(unittest.TestCase):
+class TestConvergence(unittest2.TestCase):
     def setUp(self):
         self.directory = tempfile.mkdtemp()
 

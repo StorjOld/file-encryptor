@@ -4,7 +4,7 @@ import os
 
 import key_generators
 
-class TestKeyGenerators(unittest.TestCase):
+class TestKeyGenerators(unittest2.TestCase):
     def setUp(self):
         self.directory = tempfile.mkdtemp()
 
