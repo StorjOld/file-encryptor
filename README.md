@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Storj/file-encryptor.svg)](https://travis-ci.org/Storj/file-encryptor)
+
 file-encryptor
 ==============
 
