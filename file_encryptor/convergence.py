@@ -70,7 +70,6 @@ def iter_transform(filename, key):
 
     """
     # We are not specifying the IV here.
-    # aes = pycryptopp.cipher.aes.AES(key=key)
     aes = AES.new(key, AES.MODE_CTR, counter=Counter.new(128))
 
     with open(filename, "rb+") as f:
