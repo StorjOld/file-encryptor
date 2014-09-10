@@ -57,7 +57,7 @@ key = HMAC-SHA256(passphrase, hex(SHA256(file-contents)))
 
 If no passphrase is given, a default is used.
 
-The file itself is encrypted using AES128-CTR, from pycryptopp. We're not
+The file itself is encrypted using AES128-CTR, from pycrypto. We're not
 specifying any IV, thinking that for convergent encryption that is the right
 thing to do.
 
