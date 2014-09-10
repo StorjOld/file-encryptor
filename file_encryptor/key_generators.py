@@ -9,7 +9,7 @@ def sha256_file(path):
 
     with open(path) as f:
         for chunk in iter(lambda: f.read(CHUNK_SIZE), b''):
-            h.update(chunk)
+            h.update(chunk.encode('utf-8'))
 
     return h.hexdigest()
 
