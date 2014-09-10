@@ -17,7 +17,7 @@ setup(
     description='Convergent encryption, focused on file handling',
     long_description=longdescription,
     install_requires=[
-        'pycryptopp >= 0.6.0',
+        'pycrypto >= 2.6.1',
     ],
     extras_require={
         'test': [
