@@ -14,4 +14,9 @@ setup(
     install_requires=[
         'pycryptopp >= 0.6.0',
     ],
+    extras_require={
+        'test': [
+            'tox'
+        ]
+    }
 )
