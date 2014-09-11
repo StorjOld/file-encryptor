@@ -18,8 +18,9 @@ def encrypt_file_inline(filename, passphrase):
     k = key_generators.key_from_file(filename, passphrase)
 
     inline_transform(filename, k)
-
-    return k.encode("hex")
+    
+    return k
+    # return k.encode("hex")
 
 
 def decrypt_file_inline(filename, k):
@@ -29,7 +30,7 @@ def decrypt_file_inline(filename, k):
     returned by encrypt_file_inline.
 
     """
-    k = k.decode("hex")
+    #k = k.decode("hex")
     inline_transform(filename, k)
 
 
@@ -40,7 +41,7 @@ def decrypt_generator(filename, k):
     returned by encrypt_file_inline.
 
     """
-    k = k.decode("hex")
+    #k = k.decode("hex")
 
     for chunk, _ in iter_transform(filename, k):
         yield chunk
