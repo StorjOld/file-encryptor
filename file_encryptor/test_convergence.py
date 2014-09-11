@@ -13,13 +13,13 @@ class TestConvergence(unittest.TestCase):
         self.sample3 = os.path.join(self.directory, "frowny.txt")
 
         with open(self.sample1, "wb") as f:
-            f.write("Superstar!\n")
+            f.write("Superstar!\n".encode())
 
         with open(self.sample2, "wb") as f:
-            f.write("Superstar!\n")
+            f.write("Superstar!\n".encode())
 
         with open(self.sample3, "wb") as f:
-            f.write("Frowny face :(\n")
+            f.write("Frowny face :(\n".encode())
 
     def contents(self, name):
         with open(name, "rb") as f:
@@ -36,7 +36,7 @@ class TestConvergence(unittest.TestCase):
 
         self.assertNotEqual(
             self.contents(self.sample1),
-            "Superstar!\n")
+            "Superstar!\n".encode())
 
     def test_inline_encryption_with_passphrase(self):
         convergence.encrypt_file_inline(self.sample1, "potato")
@@ -80,7 +80,7 @@ class TestConvergence(unittest.TestCase):
 
         key = convergence.encrypt_file_inline(self.sample1, "super secret")
 
-        decrypted = ""
+        decrypted = "".encode()
         for chunk in convergence.decrypt_generator(self.sample1, key):
             decrypted += chunk
 
