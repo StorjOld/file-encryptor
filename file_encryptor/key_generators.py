@@ -30,7 +30,8 @@ def key_from_file(filename, passphrase):
 
     return keyed_hash(hexdigest, passphrase)
 
-def keyed_hash(hexdigest, passphrase):
+def keyed_hash(digest, passphrase):
     """Calculate a HMAC/keyed hash."""
-
-    return hmac.new(passphrase, hexdigest, hashlib.sha256).digest()
+    encodedPassphrase = passphrase.encode()
+    encodedDigest = digest.encode()
+    return hmac.new(encodedPassphrase, encodedDigest, hashlib.sha256).digest()
