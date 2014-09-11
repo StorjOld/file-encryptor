@@ -7,7 +7,7 @@ def sha256_file(path):
     """Calculate sha256 hex digest of a file."""
     h = hashlib.sha256()
 
-    with open(path) as f:
+    with open(path, 'rb') as f:
         for chunk in iter(lambda: f.read(CHUNK_SIZE), b''):
             h.update(chunk)
 
