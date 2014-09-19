@@ -2,7 +2,7 @@ import unittest
 import tempfile
 import os
 
-import key_generators
+from . import key_generators
 
 class TestKeyGenerators(unittest.TestCase):
     def setUp(self):

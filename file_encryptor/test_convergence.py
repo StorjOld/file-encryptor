@@ -2,7 +2,7 @@ import unittest
 import tempfile
 import os
 
-import convergence
+from . import convergence
 
 class TestConvergence(unittest.TestCase):
     def setUp(self):
