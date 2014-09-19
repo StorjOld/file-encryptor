@@ -2,7 +2,7 @@ import unittest
 import tempfile
 import os
 
-import convergence
+from file_encryptor import convergence
 
 class TestConvergence(unittest.TestCase):
     def setUp(self):
