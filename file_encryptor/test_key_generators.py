@@ -2,7 +2,7 @@ import unittest
 import tempfile
 import os
 
-from . import key_generators
+from file_encryptor import key_generators
 
 class TestKeyGenerators(unittest.TestCase):
     def setUp(self):

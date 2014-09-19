@@ -1,7 +1,7 @@
 import hashlib
 import hmac
 
-from .settings import CHUNK_SIZE, DEFAULT_HMAC_PASSPHRASE
+from file_encryptor.settings import CHUNK_SIZE, DEFAULT_HMAC_PASSPHRASE
 
 def sha256_file(path):
     """Calculate sha256 hex digest of a file."""

@@ -1,8 +1,8 @@
 from Crypto.Cipher import AES
 from Crypto.Util import Counter
-from .settings import CHUNK_SIZE
+from file_encryptor.settings import CHUNK_SIZE
 
-from . import key_generators
+from file_encryptor import key_generators
 
 def encrypt_file_inline(filename, passphrase):
     """Encrypt file inline, with an optional passphrase.
