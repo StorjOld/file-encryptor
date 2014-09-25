@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/Storj/file-encryptor.svg)](https://travis-ci.org/Storj/file-encryptor)
-
 file-encryptor
 ==============
+[![Build Status](https://travis-ci.org/Storj/file-encryptor.svg)](https://travis-ci.org/Storj/file-encryptor)
+[![Coverage Status](https://coveralls.io/repos/Storj/file-encryptor/badge.png?branch=master)](https://coveralls.io/r/Storj/file-encryptor?branch=master)
 
 Convergent encryption focused on encryption and decryption of files.
 Contains helper methods to encrypt and decrypt files inline (no extra
