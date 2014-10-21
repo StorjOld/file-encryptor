@@ -37,7 +37,7 @@ convergence.decrypt_inline_file("/path/to/file", key)
 ```
 
 The reason why you cannot use the passphrase directly is because the key is
-derived from both the passphrase and the sha256 of the original file.
+derived from both the passphrase and the SHA-256 of the original file.
 
 For streaming applications, you can decrypt a file with a generator:
 
