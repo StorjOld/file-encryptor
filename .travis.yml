@@ -1,8 +1,15 @@
 language: python
-env:
-  - TOXENV=py27
-  - TOXENV=py34
+python:
+  - 2.7
+  - 3.4
 install:
   - pip install -e '.[test]'
+  - pip install coveralls
+env:
+  - TEST_DIR=file_encryptor
 script:
-  - tox
+  - cd $TEST_DIR
+  - coverage run --omit=*Crypto* -m unittest discover
+  - coverage report -m
+after_success: 
+  coveralls
