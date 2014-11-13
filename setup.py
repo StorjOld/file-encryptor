@@ -18,10 +18,5 @@ setup(
     long_description=longdescription,
     install_requires=[
         'pycrypto >= 2.6.1',
-    ],
-    extras_require={
-        'test': [
-            'tox'
-        ]
-    }
+    ]
 )
