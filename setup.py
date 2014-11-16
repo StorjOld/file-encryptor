@@ -25,7 +25,6 @@
 
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
-from file_encryptor import __version__ as version
 
 install_requirements = [
     'pycrypto>=2.6.1'
@@ -60,7 +59,7 @@ class PyTest(TestCommand):
 
 setup(
     name='file_encryptor',
-    version=version,
+    version='0.2.2',
     url='https://github.com/Storj/file-encryptor',
     download_url='https://github.com/storj/file-encryptor/tarball/0.2.2',
     license='MIT',
