@@ -66,7 +66,7 @@ setup(
     license='MIT',
     author='Storj Labs',
     author_email='hello@storj.io',
-    description='Tool for convergently encryption files used by MetaDisk.',
+    description='Tool for convergently encrypting files used by MetaDisk.',
     packages=['file_encryptor'],
     cmdclass={'test': PyTest},
     install_requires=install_requirements,
