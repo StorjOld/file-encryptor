@@ -62,7 +62,7 @@ setup(
     name='file_encryptor',
     version=version,
     url='https://github.com/Storj/file-encryptor',
-    download_url='https://github.com/storj/file-encryptor/tarball/0.2.1',
+    download_url='https://github.com/storj/file-encryptor/tarball/0.2.2',
     license='MIT',
     author='Storj Labs',
     author_email='hello@storj.io',
