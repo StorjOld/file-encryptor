@@ -55,7 +55,3 @@ target/
 
 # OS X
 .DS_Store
-
-# Documentation
-docs/Makefile
-docs/conf.py
