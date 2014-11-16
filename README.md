@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Storj/file-encryptor.svg)](https://travis-ci.org/Storj/file-encryptor)
 [![Coverage Status](https://coveralls.io/repos/Storj/file-encryptor/badge.png?branch=master)](https://coveralls.io/r/Storj/file-encryptor?branch=master)
+[![PyPI version](https://badge.fury.io/py/file_encryptor.svg)](http://badge.fury.io/py/file_encryptor)
 
 This is a library used by MetaDisk to convergently encrypt and decrypt files. It contains helper methods to encrypt and decrypt files inline (without using extra space) and to stream decryption.
 
