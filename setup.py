@@ -33,7 +33,6 @@ install_requirements = [
 
 test_requirements = [
     'pytest',
-    'coverage',
     'pytest-pep8',
     'pytest-cache',
     'coveralls'

@@ -3,6 +3,8 @@ python:
   - 2.7
   - 3.3
   - 3.4
+install:
+  - pip install coverage
 script: 
   - coverage run setup.py test -a "--doctest-modules --pep8 -v tests/"
   - coverage report -m --include="file_encryptor/*"
