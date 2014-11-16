@@ -5,6 +5,14 @@
 
 This is a library used by MetaDisk to convergently encrypt and decrypt files. It contains helper methods to encrypt and decrypt files inline (without using extra space) and to stream decryption.
 
+## Installation
+
+You can easily install `file-encryptor` using pip:
+
+```
+pip install file_encryptor
+```
+
 ## Usage
 
 Here's an example to encrypt a file inline using convergent encryption:
