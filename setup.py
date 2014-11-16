@@ -62,6 +62,7 @@ setup(
     name='file_encryptor',
     version=version,
     url='https://github.com/Storj/file-encryptor',
+    download_url='https://github.com/storj/file-encryptor/tarball/0.2.0',
     license='MIT',
     author='Storj Labs',
     author_email='hello@storj.io',
@@ -69,5 +70,7 @@ setup(
     packages=['file_encryptor'],
     cmdclass={'test': PyTest},
     install_requires=install_requirements,
-    tests_require=test_requirements
+    tests_require=test_requirements,
+    keywords = ['storj', 'metadisk', 'convergent encryption'],
+    classifiers = []
 )
