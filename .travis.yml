@@ -1,15 +1,12 @@
 language: python
 python:
   - 2.7
+  - 3.3
   - 3.4
-install:
-  - pip install -e '.[test]'
-  - pip install coveralls
-env:
-  - TEST_DIR=file_encryptor
-script:
-  - cd $TEST_DIR
-  - coverage run --omit=*Crypto* -m unittest discover
-  - coverage report -m
-after_success: 
-  coveralls
+script: 
+  - coverage run setup.py test -a "--doctest-modules --pep8 -v tests/"
+  - coverage report -m --include="file_encryptor/*"
+after_success: coveralls
+notifications:
+  slack:
+    secure: SGzOs68mIHQdliO/9CVKfYVbkS4d72dB5ta7PggnJsIGl6Eq8dRruRa5oj5tYLbVkPW4xMUGvBzETc8w0U0bgIsrkF03OMzZU9nnBOckvf3L4tu3+nLOiiYJgyQdSOYnmL39s1u1fOjQZp6Z2aTF4g8t7OzxZnBoIKNDdFklgos=
