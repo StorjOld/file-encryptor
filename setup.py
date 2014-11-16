@@ -25,7 +25,7 @@
 
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
-import file_encryptor
+from file_encryptor import __version__ as version
 
 install_requirements = [
     'pycrypto>=2.6.1'
@@ -60,7 +60,7 @@ class PyTest(TestCommand):
 
 setup(
     name='file_encryptor',
-    version=file_encryptor.__version__,
+    version=version,
     url='https://github.com/Storj/file-encryptor',
     license='MIT',
     author='Storj Labs',
