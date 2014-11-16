@@ -59,7 +59,7 @@ class PyTest(TestCommand):
 
 setup(
     name='file_encryptor',
-    version='0.2.2',
+    version='0.2.3',
     url='https://github.com/Storj/file-encryptor',
     download_url='https://github.com/storj/file-encryptor/tarball/0.2.2',
     license='MIT',
