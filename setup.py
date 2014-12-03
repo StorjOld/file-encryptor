@@ -27,7 +27,7 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 LONG_DESCRIPTION = open('README.rst').read()
-VERSION = '0.2.4'
+VERSION = '0.2.5'
 
 install_requirements = [
     'pycrypto>=2.6.1'
