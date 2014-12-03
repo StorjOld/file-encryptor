@@ -26,7 +26,8 @@
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-version = '0.2.4'
+LONG_DESCRIPTION = open('README.rst').read()
+VERSION = '0.2.4'
 
 install_requirements = [
     'pycrypto>=2.6.1'
@@ -61,16 +62,17 @@ class PyTest(TestCommand):
 
 setup(
     name='file_encryptor',
-    version=version,
+    version=VERSION,
     url='https://github.com/Storj/file-encryptor',
-    download_url='https://github.com/storj/file-encryptor/tarball/'+version,
-    license='MIT',
+    download_url='https://github.com/storj/file-encryptor/tarball/' + VERSION,
+    license=open('LICENSE').read(),
     author='Storj Labs',
     author_email='hello@storj.io',
     description='Tool for convergently encrypting files used by MetaDisk.',
+    long_description=LONG_DESCRIPTION,
     packages=['file_encryptor'],
     cmdclass={'test': PyTest},
     install_requires=install_requirements,
     tests_require=test_requirements,
-    keywords = ['storj', 'metadisk', 'convergent encryption']
+    keywords=['storj', 'metadisk', 'convergent encryption']
 )
