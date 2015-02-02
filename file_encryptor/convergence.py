@@ -51,7 +51,7 @@ def encrypt_file_inline(filename, passphrase):
     return key
 
 
-def encrypt_blob_inline(blob, passphrase):
+def encrypt_blob_inline(blob, passphrase, startpos):
     """Encrypt file-like object inline, with an optional passphrase.
 
     If you set the passphrase to None, a default is used.
@@ -62,12 +62,14 @@ def encrypt_blob_inline(blob, passphrase):
     :type blob: file-like object
     :param passphrase: The passphrase used to decrypt the file.
     :type passphrase: str or None
+    :param startpos: The starting position of file
+    :type startpos: int
     :returns: Encrypted file blob and the key required to decrypt it.
     :rtype: tuple
     """
     key = key_generators.key_from_blob(blob, passphrase)
 
-    encrypted_blob = inline_blob_transform(blob, key)
+    encrypted_blob = inline_blob_transform(blob, key, startpos)
 
     return key, encrypted_blob
 
@@ -123,7 +125,7 @@ def inline_transform(filename, key):
         pos = fp.tell()
 
 
-def inline_blob_transform(blob, key):
+def inline_blob_transform(blob, key, startpos):
     """Encrypt file-like object inline.
 
     Encrypts a given file object with the given key,
@@ -133,10 +135,13 @@ def inline_blob_transform(blob, key):
     :param blob: The file data to encrypt.
     :type blob: file-like object
     :param key: The key used to encrypt the file.
+    :param startpos: The starting position of file
+    :type startpos: int
     :type key: str
     :returns: Encrypted data blob
     """
-    pos = 0
+
+    pos = startpos
     for chunk in iter_blob_transform(blob, key):
         blob.seek(pos)
         blob.write(chunk)
@@ -185,5 +190,5 @@ def iter_blob_transform(blob, key):
     # We are not specifying the IV here.
     aes = AES.new(key, AES.MODE_CTR, counter=Counter.new(128))
 
-    for chunk in iter(lambda: blob.read(CHUNK_SIZE), b''):
+    for chunk in blob:
         yield aes.encrypt(chunk)
