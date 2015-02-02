@@ -3,7 +3,7 @@
 
 # The MIT License (MIT)
 #
-# Copyright (c) 2014 Storj Labs
+# Copyright (c) 2014-2015 Storj Labs
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 LONG_DESCRIPTION = open('README.rst').read()
-VERSION = '0.2.5'
+VERSION = '0.2.6'
 
 install_requirements = [
     'pycrypto>=2.6.1'
