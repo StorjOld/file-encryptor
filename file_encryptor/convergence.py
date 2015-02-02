@@ -51,6 +51,27 @@ def encrypt_file_inline(filename, passphrase):
     return key
 
 
+def encrypt_blob_inline(blob, passphrase):
+    """Encrypt file-like object inline, with an optional passphrase.
+
+    If you set the passphrase to None, a default is used.
+    This will make you vulnerable to confirmation attacks
+    and learn-partial-information attacks.
+
+    :param blob: The file data.
+    :type blob: file-like object
+    :param passphrase: The passphrase used to decrypt the file.
+    :type passphrase: str or None
+    :returns: The key required to decrypt the file.
+    :rtype: str
+    """
+    key = key_generators.key_from_blob(blob, passphrase)
+
+    inline_blob_transform(blob, key)
+
+    return key
+
+
 def decrypt_file_inline(filename, key):
     """Decrypt file inline with given key.
 
@@ -89,7 +110,7 @@ def inline_transform(filename, key):
     and replaces it directly without any extra
     space requirement.
 
-    :param filename: The name of the file to decrypt.
+    :param filename: The name of the file to encrypt.
     :type filename: str
     :param key: The key used to encrypt the file.
     :type key: str
@@ -100,6 +121,26 @@ def inline_transform(filename, key):
         fp.write(chunk)
         fp.flush()
         pos = fp.tell()
+
+
+def inline_blob_transform(blob, key):
+    """Encrypt file-like object inline.
+
+    Encrypts a given file object with the given key,
+    and replaces it directly without any extra
+    space requirement.
+
+    :param blob: The file data to encrypt.
+    :type blob: file-like object
+    :param key: The key used to encrypt the file.
+    :type key: str
+    """
+    pos = 0
+    for chunk in iter_blob_transform(blob, key):
+        blob.seek(pos)
+        blob.write(chunk)
+        blob.flush()
+        pos = blob.tell()
 
 
 def iter_transform(filename, key):
@@ -122,3 +163,24 @@ def iter_transform(filename, key):
     with open(filename, 'rb+') as f:
         for chunk in iter(lambda: f.read(CHUNK_SIZE), b''):
             yield aes.encrypt(chunk), f
+
+
+def iter_blob_transform(blob, key):
+    """Generate encrypted blob with given key.
+
+    This generator function reads the blob
+    in chunks and encrypts them using AES-CTR,
+    with the specified key.
+
+    :param blob: The file blob to encrypt.
+    :type blob: file-like object
+    :param key: The key used to encrypt the blob.
+    :type key: str
+    :returns: A generator that produces encrypted file chunks.
+    :rtype: generator
+    """
+    # We are not specifying the IV here.
+    aes = AES.new(key, AES.MODE_CTR, counter=Counter.new(128))
+
+    for chunk in iter(lambda: blob.read(CHUNK_SIZE), b''):
+        yield aes.encrypt(chunk)
