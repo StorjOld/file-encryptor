@@ -62,14 +62,14 @@ def encrypt_blob_inline(blob, passphrase):
     :type blob: file-like object
     :param passphrase: The passphrase used to decrypt the file.
     :type passphrase: str or None
-    :returns: The key required to decrypt the file.
-    :rtype: str
+    :returns: Encrypted file blob and the key required to decrypt it.
+    :rtype: tuple
     """
     key = key_generators.key_from_blob(blob, passphrase)
 
-    inline_blob_transform(blob, key)
+    encrypted_blob = inline_blob_transform(blob, key)
 
-    return key
+    return key, encrypted_blob
 
 
 def decrypt_file_inline(filename, key):
@@ -134,6 +134,7 @@ def inline_blob_transform(blob, key):
     :type blob: file-like object
     :param key: The key used to encrypt the file.
     :type key: str
+    :returns: Encrypted data blob
     """
     pos = 0
     for chunk in iter_blob_transform(blob, key):
@@ -141,6 +142,8 @@ def inline_blob_transform(blob, key):
         blob.write(chunk)
         blob.flush()
         pos = blob.tell()
+
+    return blob
 
 
 def iter_transform(filename, key):
