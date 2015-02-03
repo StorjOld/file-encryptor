@@ -46,46 +46,6 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def sha256_blob(blob):
-    """Calculate sha256 hex digest of a file-like object.
-
-    :param blob: The file data you are calculating the digest of.
-    :type path: str
-    :returns: The sha256 hex digest of the specified data.
-    :rtype: builtin_function_or_method
-    """
-    h = hashlib.sha256()
-
-    for chunk in iter(lambda: blob.read(CHUNK_SIZE), b''):
-        h.update(chunk)
-
-    return h.hexdigest()
-
-
-def key_from_blob(blob, passphrase):
-    """Calculate convergent encryption key.
-
-    This takes a file-like object and an optional passphrase.
-    If no passphrase is given, a default is used.
-    Using the default passphrase means you will be
-    vulnerable to confirmation attacks and
-    learn-partial-information attacks.
-
-    :param blob: The data you want to create a key for.
-    :type blob: File data
-    :param passphrase: The passphrase you want to use to encrypt the file.
-    :type passphrase: str or None
-    :returns: A convergent encryption key.
-    :rtype: str
-    """
-    hexdigest = sha256_blob(blob)
-
-    if passphrase is None:
-        passphrase = DEFAULT_HMAC_PASSPHRASE
-
-    return keyed_hash(hexdigest, passphrase)
-
-
 def key_from_file(filename, passphrase):
     """Calculate convergent encryption key.
 

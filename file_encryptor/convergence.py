@@ -51,29 +51,6 @@ def encrypt_file_inline(filename, passphrase):
     return key
 
 
-def encrypt_blob_inline(blob, passphrase, startpos):
-    """Encrypt file-like object inline, with an optional passphrase.
-
-    If you set the passphrase to None, a default is used.
-    This will make you vulnerable to confirmation attacks
-    and learn-partial-information attacks.
-
-    :param blob: The file data.
-    :type blob: file-like object
-    :param passphrase: The passphrase used to decrypt the file.
-    :type passphrase: str or None
-    :param startpos: The starting position of file
-    :type startpos: int
-    :returns: Encrypted file blob and the key required to decrypt it.
-    :rtype: tuple
-    """
-    key = key_generators.key_from_blob(blob, passphrase)
-
-    encrypted_blob = inline_blob_transform(blob, key, startpos)
-
-    return key, encrypted_blob
-
-
 def decrypt_file_inline(filename, key):
     """Decrypt file inline with given key.
 
@@ -125,32 +102,6 @@ def inline_transform(filename, key):
         pos = fp.tell()
 
 
-def inline_blob_transform(blob, key, startpos):
-    """Encrypt file-like object inline.
-
-    Encrypts a given file object with the given key,
-    and replaces it directly without any extra
-    space requirement.
-
-    :param blob: The file data to encrypt.
-    :type blob: file-like object
-    :param key: The key used to encrypt the file.
-    :param startpos: The starting position of file
-    :type startpos: int
-    :type key: str
-    :returns: Encrypted data blob
-    """
-
-    pos = startpos
-    for chunk in iter_blob_transform(blob, key):
-        blob.seek(pos)
-        blob.write(chunk)
-        blob.flush()
-        pos = blob.tell()
-
-    return blob
-
-
 def iter_transform(filename, key):
     """Generate encrypted file with given key.
 
@@ -171,24 +122,3 @@ def iter_transform(filename, key):
     with open(filename, 'rb+') as f:
         for chunk in iter(lambda: f.read(CHUNK_SIZE), b''):
             yield aes.encrypt(chunk), f
-
-
-def iter_blob_transform(blob, key):
-    """Generate encrypted blob with given key.
-
-    This generator function reads the blob
-    in chunks and encrypts them using AES-CTR,
-    with the specified key.
-
-    :param blob: The file blob to encrypt.
-    :type blob: file-like object
-    :param key: The key used to encrypt the blob.
-    :type key: str
-    :returns: A generator that produces encrypted file chunks.
-    :rtype: generator
-    """
-    # We are not specifying the IV here.
-    aes = AES.new(key, AES.MODE_CTR, counter=Counter.new(128))
-
-    for chunk in blob:
-        yield aes.encrypt(chunk)
