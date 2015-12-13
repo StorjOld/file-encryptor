@@ -23,10 +23,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import sys
+
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-LONG_DESCRIPTION = open('README.rst').read()
+LONG_DESCRIPTION = ''
+
+if sys.version_info[:1] < (3,):
+    LONG_DESCRIPTION = open('README.rst').read()
+else:
+    LONG_DESCRIPTION = open('README.rst', encoding='utf-8').read()
+
 VERSION = '0.2.6'
 
 install_requirements = [
